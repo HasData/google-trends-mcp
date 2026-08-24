@@ -182,11 +182,11 @@ Interest over time, by region, or the related queries and topics for a term.
 
 | Parameter | Type | Required | Notes |
 | :--- | :--- | :--- | :--- |
-| `q` | string | yes | The search term. `timeseries` and `geoMap` also take several comma-separated terms to compare |
+| `q` | string | yes | The search term. `timeseries` and `geoMap` take up to 5 comma-separated terms to compare, and a sixth is rejected with a 400 |
 | `dataType` | string | | `timeseries` by default, plus `geoMap`, `relatedTopics` and `relatedQueries`. The two related types take a single term only |
 | `date` | string | | A window such as `now 7-d`, `today 12-m`, `today 5-y` or `all`, or a custom `yyyy-mm-dd yyyy-mm-dd` range |
 | `geo` | string | | A location code such as `US` or `US-CA`. Worldwide when empty |
-| `region` | string | | Granularity for `geoMap` only: `country`, `region` (subregion), `dma` (metro) or `city` |
+| `region` | string | | Granularity for `geoMap` only: `country`, `region` (subregion), `dma` (metro) or `city`. The default depends on `geo`, `country` worldwide and finer once a `geo` is set |
 | `cat` | string | | Category id to narrow the term. `0` is all categories |
 | `gprop` | string | | The Google property: `images`, `news`, `froogle` (Shopping) or `youtube`. Web search when empty |
 | `tz` | number | | Time-zone offset in minutes, default `420` (PDT). Shifts how hourly ranges are bucketed |
