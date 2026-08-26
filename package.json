@@ -1,16 +1,40 @@
 {
   "name": "@hasdata/google-trends-mcp",
   "mcpName": "com.hasdata/google-trends",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MCP server for Google Trends through HasData's hosted API: interest over time, interest by region, and rising and top related queries and topics. No Google account.",
   "type": "module",
-  "bin": { "hasdata-google-trends-mcp": "index.mjs" },
-  "files": ["index.mjs", "README.md", "LICENSE"],
-  "scripts": { "test": "node --test" },
-  "dependencies": { "mcp-remote": "^0.1.43" },
-  "engines": { "node": ">=18" },
+  "bin": {
+    "hasdata-google-trends-mcp": "index.mjs"
+  },
+  "files": [
+    "index.mjs",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test"
+  },
+  "dependencies": {
+    "mcp-remote": "^0.1.43"
+  },
+  "engines": {
+    "node": ">=18"
+  },
   "license": "MIT",
-  "repository": { "type": "git", "url": "https://github.com/HasData/google-trends-mcp.git" },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HasData/google-trends-mcp.git"
+  },
   "homepage": "https://hasdata.com/apis/google-trends-api",
-  "keywords": ["mcp", "google-trends", "google-trends-mcp", "trends", "seo", "model-context-protocol", "hasdata", "scraper"]
+  "keywords": [
+    "mcp",
+    "google-trends",
+    "google-trends-mcp",
+    "trends",
+    "seo",
+    "model-context-protocol",
+    "hasdata",
+    "scraper"
+  ]
 }
