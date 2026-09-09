@@ -2,7 +2,7 @@
   "name": "@hasdata/google-trends-mcp",
   "mcpName": "com.hasdata/google-trends",
   "version": "1.0.1",
-  "description": "MCP server for Google Trends through HasData's hosted API: interest over time, interest by region, and rising and top related queries and topics. No Google account.",
+  "description": "MCP server for Google Trends through HasData's hosted API: interest over time, interest by region, and rising and top related queries and topics. 1,000 free credits every month.",
   "type": "module",
   "bin": {
     "hasdata-google-trends-mcp": "index.mjs"
