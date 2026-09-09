@@ -36,7 +36,7 @@ https://mcp.hasdata.com/api/mcp?apis=google_trends
 
 ## What you need
 
-An MCP client and a HasData API key from the [dashboard](https://app.hasdata.com/sign-up?utm_source=github&utm_medium=syndication&utm_campaign=google-trends-mcp), free to create with no card, and the trial covers about 200 calls at the 5-credit rate. This is a remote server, so the simplest path is a URL and an `x-api-key` header, with no container to run and no Google account anywhere in the flow. A client that only speaks stdio reaches it through a thin launcher, published as `@hasdata/google-trends-mcp` on npm and `hasdata-google-trends-mcp` on PyPI, shown below.
+An MCP client and a HasData API key from the [dashboard](https://app.hasdata.com/sign-up?utm_source=github&utm_medium=syndication&utm_campaign=google-trends-mcp), free to create with no card, and the free tier covers about 200 calls a month at the 5-credit rate. This is a remote server, so the simplest path is a URL and an `x-api-key` header, with no container to run and no Google account anywhere in the flow. A client that only speaks stdio reaches it through a thin launcher, published as `@hasdata/google-trends-mcp` on npm and `hasdata-google-trends-mcp` on PyPI, shown below.
 
 ## Quick start
 
@@ -279,7 +279,7 @@ Google does not publish a public Trends API. The two common routes are the unoff
 | Rate limits and 429s | Frequent and yours to manage | Handled behind the endpoint |
 | Output | Pandas frames or raw payloads to reshape | Structured JSON, values pre-parsed |
 | Setup | A Python environment and upkeep as it breaks | One key and one URL |
-| Cost | Free, when it works | Paid past the trial, 5 credits a call |
+| Cost | Free, when it works | Paid past the free tier, 5 credits a call |
 
 If you already run `pytrends` at low volume and do not mind fixing it when it breaks, that stays the free answer. This server is for agents and pipelines that need the data to arrive the same shape every time.
 
