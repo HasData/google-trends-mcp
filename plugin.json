@@ -1,0 +1,23 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "hasdata-google-trends-mcp",
+  "version": "1.0.1",
+  "description": "Google Trends MCP server for Cursor. Interest over time, interest by region, and rising and top related queries and topics for any keyword, as structured JSON. Remote MCP server hosted by HasData, connects over streamable HTTP with your HasData API key.",
+  "author": {
+    "name": "HasData",
+    "url": "https://hasdata.com"
+  },
+  "homepage": "https://hasdata.com/apis/google-trends-api",
+  "repository": "https://github.com/HasData/google-trends-mcp",
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "google-trends",
+    "google-trends-mcp",
+    "trends",
+    "seo",
+    "model-context-protocol",
+    "hasdata",
+    "scraper"
+  ]
+}
