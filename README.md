@@ -174,9 +174,9 @@ A comparison across terms rides in one `timeseries` call. Region breakdowns, rel
 
 ## Tools
 
-| Tool | Credits | What it returns |
-| :--- | :--- | :--- |
-| `hasdata_google_trends_search_getTrendsData` | 5 | Interest-over-time series, geo-level breakdowns, and rising/top related topics/queries with relative scores |
+| Tool | What it returns |
+| --- | --- |
+| `hasdata_google_trends_search_getTrendsData` | Interest-over-time series, geo-level breakdowns, and rising/top related topics/queries with relative scores. 5 credits a call |
 
 One tool, read-only. The sample below is trimmed from a real call, and the numbers move as the trend moves. Read it as a shape. The tool name links to its endpoint reference, which carries the full parameter list.
 
