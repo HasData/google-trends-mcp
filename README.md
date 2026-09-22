@@ -245,7 +245,7 @@ Your client almost never sees an HTTP error code from a tool call. The MCP layer
 
 **A term with too little search volume returns a successful result with the data arrays empty**, not an error. Google Trends has nothing to show for a rare term, and `requestMetadata.status` still reads `ok`. Test for the points before you chart them.
 
-**An identifier the platform rejects returns 400** with `requestMetadata.status` set to `error`. An unknown `geo` or `cat` value is the usual way to see this.
+**An identifier outside the documented list is refused before the scrape.** `geo` and `cat` are enums, so an unknown value comes back as a 422 naming the field and listing the accepted choices rather than as a silent miss.
 
 Results that carry data also carry a `requestMetadata.id` worth quoting in support.
 
