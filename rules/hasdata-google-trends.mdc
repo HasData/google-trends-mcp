@@ -1,0 +1,38 @@
+---
+description: How to pull Google Trends interest, regional breakdowns and related queries through the HasData MCP server
+alwaysApply: false
+---
+
+# Google Trends through HasData
+
+One tool, `hasdata_google_trends_search_getTrendsData`. It takes `q` and returns one block of data, and which block you get is decided by `dataType`.
+
+## `dataType` renames the answer
+
+`timeseries` returns `interestOverTime`, `geoMap` returns `geoMap`, `relatedTopics` returns `relatedTopics` and `relatedQueries` returns `relatedQueries`. The top-level key changes with the parameter, so reading a fixed key means three of the four calls look empty. One call gives one block, and a question that needs the curve and the regions needs two calls.
+
+## Interest is relative, never absolute
+
+Google Trends reports interest on a 0 to 100 scale inside the requested window and set of terms. The numbers are not searches, and they are not comparable across two separate calls, because each call rescales to its own maximum.
+
+Comparing terms means putting them in one request. `q` takes them comma-separated up to five, and a sixth is rejected with a 400. Each point then carries a `values` array with one entry per term, each holding `query`, `extractedValue` and a `hasData` flag, which is how a term with nothing behind it is distinguished from a term sitting at zero.
+
+That comparison cannot be carried into the other blocks. `relatedTopics` and `relatedQueries` take a single term and answer a multi-term `q` with a 422 reading `supportsSingleQuery`.
+
+A point also carries `isPartial`. The final bucket of a running window is usually partial, so treating it as a finished period turns an incomplete count into a fall.
+
+## Rising is labelled, not measured
+
+In `relatedQueries`, a rising entry reads either as a percentage such as `+300%` or as `Breakout`. A `Breakout` still carries an `extractedValue`, and it is a sentinel far above any real percentage rather than a measurement. Sorting the rising list on that number puts the sentinels on top as though they were the biggest gains, so sort on the label and treat `Breakout` as its own category.
+
+## Targeting
+
+`geo` is an enum of documented locations and a value outside it fails with a 422 naming `geo`, so a made-up code is rejected rather than ignored. `region` chooses the granularity of a `geoMap` between country, region, dma and city, and its default follows `geo`, so pass it explicitly or report which granularity you actually got. `cat` narrows to a category, `gprop` switches the corpus to images, news, froogle or youtube, and `date` takes Google's own range strings such as `now 1-H` or `today 12-m`.
+
+`tz` is an offset in minutes and it defaults to 420, which is UTC-7. A series read without setting it is on Pacific time, and a daily boundary can land on the wrong day.
+
+## A quiet term is not an error
+
+A term with too little volume returns a successful call with the series empty or flat at zero, and `requestMetadata.status` still reads `ok`. Report that the term has no measurable interest rather than presenting an empty chart as a failure.
+
+Each successful call spends credits, and each `dataType` is its own call, so decide which blocks the answer actually needs before running all four.
