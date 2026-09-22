@@ -7,7 +7,7 @@ A hosted Model Context Protocol (MCP) server that gives Claude, Cursor, Windsurf
 **1,000 free credits every month, no card required**, which is 200 Google Trends calls.
 
 ```
-https://mcp.hasdata.com/api/mcp?apis=google_trends
+https://mcp.hasdata.com/mcp?apis=google_trends
 ```
 
 [![Glama score](https://glama.ai/mcp/servers/HasData/google-trends-mcp/badges/score.svg)](https://glama.ai/mcp/servers/HasData/google-trends-mcp)
@@ -44,7 +44,7 @@ The server URL is the same for every client. We run it hands-on in Claude Code a
 
 | Field | Value |
 | :--- | :--- |
-| URL | `https://mcp.hasdata.com/api/mcp?apis=google_trends` |
+| URL | `https://mcp.hasdata.com/mcp?apis=google_trends` |
 | Transport | HTTP, streamable |
 | Auth header | `x-api-key: HASDATA_API_KEY` |
 
@@ -54,7 +54,7 @@ Clients with OAuth support can add the same URL as a connector and sign in witho
 <summary><b>Claude Code</b></summary>
 
 ```bash
-claude mcp add --transport http google-trends "https://mcp.hasdata.com/api/mcp?apis=google_trends" \
+claude mcp add --transport http google-trends "https://mcp.hasdata.com/mcp?apis=google_trends" \
   --header "x-api-key: HASDATA_API_KEY"
 ```
 
@@ -63,7 +63,7 @@ claude mcp add --transport http google-trends "https://mcp.hasdata.com/api/mcp?a
 <details>
 <summary><b>Claude Desktop</b></summary>
 
-Settings, then Connectors, then Add custom connector, then paste `https://mcp.hasdata.com/api/mcp?apis=google_trends` and sign in.
+Settings, then Connectors, then Add custom connector, then paste `https://mcp.hasdata.com/mcp?apis=google_trends` and sign in.
 
 For the config-file route, Claude Desktop loads only local (stdio) servers, so it reaches a remote server through a stdio launcher. The `@hasdata/google-trends-mcp` package is that launcher, and it reads the key from the environment. Add this to `claude_desktop_config.json`:
 
@@ -104,7 +104,7 @@ For Python instead of Node, swap the launcher for the PyPI package, which `uvx` 
 {
   "mcpServers": {
     "google-trends": {
-      "url": "https://mcp.hasdata.com/api/mcp?apis=google_trends",
+      "url": "https://mcp.hasdata.com/mcp?apis=google_trends",
       "headers": { "x-api-key": "HASDATA_API_KEY" }
     }
   }
@@ -122,7 +122,7 @@ For Python instead of Node, swap the launcher for the PyPI package, which `uvx` 
 {
   "mcpServers": {
     "google-trends": {
-      "serverUrl": "https://mcp.hasdata.com/api/mcp?apis=google_trends",
+      "serverUrl": "https://mcp.hasdata.com/mcp?apis=google_trends",
       "headers": { "x-api-key": "HASDATA_API_KEY" }
     }
   }
@@ -141,7 +141,7 @@ For Python instead of Node, swap the launcher for the PyPI package, which `uvx` 
   "servers": {
     "google-trends": {
       "type": "http",
-      "url": "https://mcp.hasdata.com/api/mcp?apis=google_trends",
+      "url": "https://mcp.hasdata.com/mcp?apis=google_trends",
       "headers": { "x-api-key": "HASDATA_API_KEY" }
     }
   }
