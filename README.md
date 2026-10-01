@@ -4,7 +4,7 @@
 
 A hosted Model Context Protocol (MCP) server that gives Claude, Cursor, Windsurf and any other MCP client one Google Trends tool. Pull interest over time, interest by region, and the rising and top related queries and topics for any term, all as structured JSON, with no scraping library to keep alive and no Google account.
 
-**1,000 free credits every month, no card required**, which is 200 Google Trends calls.
+**1,000 free credits every month, no card required**, which is 100 Google Trends calls.
 
 ```
 https://mcp.hasdata.com/mcp?apis=google_trends
@@ -152,23 +152,23 @@ For Python instead of Node, swap the launcher for the PyPI package, which `uvx` 
 
 ## Example prompts
 
-Prompts, not code. Paste one in and the agent picks the tool itself. Each is annotated with the calls it takes, because every successful call costs 5 credits.
+Prompts, not code. Paste one in and the agent picks the tool itself. Each is annotated with the calls it takes, because every successful call costs 10 credits.
 
 > Chart interest in "cold brew coffee" in the US over the past 12 months and tell me which weeks it peaked.
 
-*One call, 5 credits. The weekly series comes back in a single request.*
+*One call, 10 credits. The weekly series comes back in a single request.*
 
 > For "cold brew coffee" in the US, give me the rising related queries and flag the ones marked Breakout.
 
-*One call, 5 credits.*
+*One call, 10 credits.*
 
 > Compare interest in "cold brew" against "iced coffee" worldwide over five years and say which one is growing.
 
-*One call, 5 credits. The tool takes several terms in one timeseries request.*
+*One call, 10 credits. The tool takes several terms in one timeseries request.*
 
 > Show me interest in "sunscreen" by US state over the past 90 days so I can see where demand is highest.
 
-*One call, 5 credits. This is the interest-by-region view at state granularity.*
+*One call, 10 credits. This is the interest-by-region view at state granularity.*
 
 A comparison across terms rides in one `timeseries` call. Region breakdowns, related queries and related topics are each their own `dataType`, so a prompt that wants a chart plus its rising queries is two calls.
 
@@ -176,7 +176,7 @@ A comparison across terms rides in one `timeseries` call. Region breakdowns, rel
 
 | Tool | What it returns |
 | --- | --- |
-| `hasdata_google_trends_search_getTrendsData` | Interest-over-time series, geo-level breakdowns, and rising/top related topics/queries with relative scores. 5 credits a call |
+| `hasdata_google_trends_search_getTrendsData` | Interest-over-time series, geo-level breakdowns, and rising/top related topics/queries with relative scores. 10 credits a call |
 
 One tool, read-only. The sample below is trimmed from a real call, and the numbers move as the trend moves. Read it as a shape. The tool name links to its endpoint reference, which carries the full parameter list.
 
@@ -251,11 +251,11 @@ Results that carry data also carry a `requestMetadata.id` worth quoting in suppo
 
 ## Pricing, free tier and limits
 
-Every Google Trends call costs **5 credits per successful call**. Response size does not change the price. A five-year weekly series costs the same as a single week.
+Every Google Trends call costs **10 credits per successful call**. Response size does not change the price. A five-year weekly series costs the same as a single week.
 
-The free tier is **1,000 credits every month with no card**, which is 200 Google Trends calls. It renews with the billing cycle, so a low-volume agent runs on the free tier indefinitely.
+The free tier is **1,000 credits every month with no card**, which is 100 Google Trends calls. It renews with the billing cycle, so a low-volume agent runs on the free tier indefinitely.
 
-Paid plans start at **$59 a month** for 200,000 credits, which is 40,000 calls. The unit price falls with volume, from **$1.48 per 1,000 calls** on the entry plan to **$0.60** on Basic and **$0.41** across the Growth tiers. Current figures live on the [pricing page](https://hasdata.com/prices?utm_source=github&utm_medium=syndication&utm_campaign=google-trends-mcp).
+Paid plans start at **$59 a month** for 200,000 credits, which is 20,000 calls. The unit price falls with volume, from **$1.48 per 1,000 calls** on the entry plan to **$0.60** on Basic and **$0.41** across the Growth tiers. Current figures live on the [pricing page](https://hasdata.com/prices?utm_source=github&utm_medium=syndication&utm_campaign=google-trends-mcp).
 
 Your plan also sets concurrency. The free tier allows 1 request at a time, Startup 5, Basic 15, and the Growth tiers run from 50 to 500. Handle the overflow case defensively in anything unattended.
 
@@ -283,7 +283,7 @@ Google does not publish a public Trends API. The two common routes are the unoff
 | Rate limits and 429s | Frequent and yours to manage | Handled behind the endpoint |
 | Output | Pandas frames or raw payloads to reshape | Structured JSON, values pre-parsed |
 | Setup | A Python environment and upkeep as it breaks | One key and one URL |
-| Cost | Free, when it works | Paid past the free tier, 5 credits a call |
+| Cost | Free, when it works | Paid past the free tier, 10 credits a call |
 
 If you already run `pytrends` at low volume and do not mind fixing it when it breaks, that stays the free answer. This server is for agents and pipelines that need the data to arrive the same shape every time.
 
@@ -335,7 +335,7 @@ HasData accesses publicly available data only. A platform's terms may restrict a
 
 This repository is configuration and documentation for a remote server. There is no build step and nothing to containerize.
 
-The tests in `test/` assert the tool contract, the part that can break without a commit here. They check that `?apis=google_trends` returns exactly one tool, that it still declares its required parameter, that the name has not changed, and that the key in use is actually accepted. That last check calls the tool for real and costs 5 credits, which is the price of a canary that can fail for the right reason.
+The tests in `test/` assert the tool contract, the part that can break without a commit here. They check that `?apis=google_trends` returns exactly one tool, that it still declares its required parameter, that the name has not changed, and that the key in use is actually accepted. That last check calls the tool for real and costs 10 credits, which is the price of a canary that can fail for the right reason.
 
 ```bash
 # macOS and Linux
