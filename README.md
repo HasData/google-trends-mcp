@@ -14,6 +14,7 @@ https://mcp.hasdata.com/mcp?apis=google_trends
 [![tool contract](https://github.com/HasData/google-trends-mcp/actions/workflows/contract.yml/badge.svg)](https://github.com/HasData/google-trends-mcp/actions/workflows/contract.yml)
 [![MCP](https://img.shields.io/badge/MCP-remote%20%7C%20streamable%20HTTP-6366f1?style=flat-square)](https://modelcontextprotocol.io)
 [![Tools](https://img.shields.io/badge/tools-1-10b981?style=flat-square)](#tools)
+- [Prompts and resources](#prompts-and-resources)
 [![npm](https://img.shields.io/npm/v/@hasdata/google-trends-mcp?style=flat-square&logo=npm&label=npm&color=cb3837)](https://www.npmjs.com/package/@hasdata/google-trends-mcp)
 [![PyPI](https://img.shields.io/pypi/v/hasdata-google-trends-mcp?style=flat-square&logo=pypi&logoColor=white&label=PyPI&color=3775a9)](https://pypi.org/project/hasdata-google-trends-mcp/)
 [![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
@@ -232,6 +233,26 @@ The response key depends on `dataType`. `timeseries` returns `interestOverTime.t
 ```
 
 The [endpoint reference](https://docs.hasdata.com/apis/google-trends/search?utm_source=github&utm_medium=syndication&utm_campaign=google-trends-mcp) lists every `geo`, `cat` and date format the tool accepts.
+
+## Prompts and resources
+
+The server ships one prompt, a ready-made workflow a client can offer instead of making the user compose a tool call.
+
+| Prompt | What it does |
+| --- | --- |
+| `google_trends` | See how interest in a topic changes over time. |
+
+Alongside them the server exposes 5 resources, one per parameter whose accepted values are a fixed list. Reading one is cheaper than learning the vocabulary from a rejected call, and it costs no credits. Each URI is `hasdata://google_trends/<parameter>`.
+
+| Parameter | Values | What it selects |
+| --- | ---: | --- |
+| `geo` | 3517 | Specifies the location for the search. Defaults to Worldwide if not set or empty. |
+| `region` | 4 | Used to get more specific results when using "Interest by region" data type. Other data types do not accept this parameter. The default value depends on the geo location that is set. Available options: - `country`: Country - `region`: Subregion - `dma`: Metro - `city`: City Note: Not all region options will return results for every geo location. |
+| `dataType` | 4 | Defines the type of search to perform. Available options: - `timeseries`: Interest over time (default). Accepts both single and multiple queries per search. - `geoMap`: Interest by region. Accepts both single and multiple queries per search. - `relatedTopics`: Related topics. Accepts only single query per search. - `relatedQueries`: Related queries. Accepts only single query per search. |
+| `cat` | 1133 | Category of the search term. The default value is 0 ("All categories"). |
+| `gprop` | 4 | Sorts results by a specific property. The default property is Web Search (applied when the gprop parameter is not set or empty). Available options: - `images`: Image Search - `news`: News Search - `froogle`: Google Shopping - `youtube`: YouTube Search |
+
+Both lists are served without an API key, so a client can read them before a user has signed up.
 
 ## Errors and failure paths
 
