@@ -36,3 +36,9 @@ In `relatedQueries`, a rising entry reads either as a percentage such as `+300%`
 A term with too little volume returns a successful call with the series empty or flat at zero, and `requestMetadata.status` still reads `ok`. Report that the term has no measurable interest rather than presenting an empty chart as a failure.
 
 Each successful call spends credits, and each `dataType` is its own call, so decide which blocks the answer actually needs before running all four.
+
+## Prompts and resources
+
+The server also serves resources that spell out the accepted values of every parameter that takes a fixed list, each one at `hasdata://google_trends/<parameter>`. Reading one spends no credits and makes no upstream request, which beats discovering the vocabulary from a rejected call. Listing them needs no API key either, so a client can read them before the user has connected an account.
+
+Ready-made prompts cover the usual workflows. Offer one of those before composing a tool call by hand.
